@@ -44,11 +44,12 @@ class BaseTrainer:
         self.net.train()  # enter train mode
 
         loss_avg = 0.0
-        train_dataiter = iter(self.train_loader)
+        # train_dataiter = iter(self.train_loader)
 
-        for train_step in tqdm(range(1, len(train_dataiter) + 1)):
+        # for train_step in tqdm(range(1, len(train_dataiter) + 1)):
+        for batch in tqdm(self.train_loader, total=len(self.train_loader)):
             # for train_step in tqdm(range(1, 5)):
-            batch = next(train_dataiter)
+            # batch = next(train_dataiter)
             data = batch['data'].cuda()
             target = batch['soft_label'].cuda()
             # forward
@@ -61,6 +62,10 @@ class BaseTrainer:
             loss.backward()
             self.optimizer.step()
             self.scheduler.step()
+
+            del target
+            del data
+            del batch
 
             # exponential moving average, show smooth values
             with torch.no_grad():
