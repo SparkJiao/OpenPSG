@@ -41,3 +41,14 @@ python main.py
 ```
 
 You can explore the project by reading from the `main.py` and dive in. Good Luck!!
+
+## Experimental Results
+
+| model |  lr  | epoch | warm up | grad norm | weight decay | val.  | test  |
+|:------|:----:|:-----:|:-------:|:---------:|:------------:|:-----:|:-----:|
+| clip  | 5e-5 |  36   |   0.1   |    1.0    |     0.1      |       |       |
+| clip  | 1e-5 |  36   |   0.1   |    1.0    |     0.1      | 25.35 | 27.46 |
+| clip  | 1e-5 |  15   |   0.1   |    1.0    |     0.1      | 23.76 |       |
+| clip  | 1e-5 |  25   |   0.1   |    1.0    |     0.2      | 24.39 |       |
+| clip  | 1e-5 |  36   |   0.1   |    0.0    |     0.01     | 25.75 |       |
+
