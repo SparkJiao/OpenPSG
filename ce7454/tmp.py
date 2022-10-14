@@ -8,11 +8,7 @@
 # forward
 # [batch, rel_num]
 logits_per_image, _ = net(batch["data"], batch["text"])
-
-pos_index = batch["pos_index"]
-neg_index = batch["neg_index"]
-pos_mask = batch["pos_mask"]
-neg_mask = batch["neg_mask"]
+# [batch, max_pos]
 labels = batch["labels"]
 labels[~pos_mask.bool()] = -100  # Ignore padding positions
 
