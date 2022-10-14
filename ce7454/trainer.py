@@ -166,7 +166,8 @@ class CLIPTrainer(BaseTrainer):
         for batch in tqdm(self.train_loader, total=len(self.train_loader)):
             # for train_step in tqdm(range(1, 5)):
             # batch = next(train_dataiter)
-            with autocast(dtype=torch.bfloat16):
+            # with autocast(dtype=torch.bfloat16):
+            with autocast():
                 data = batch['data'].cuda()
                 text = batch['text'][0].cuda()
                 target = batch['soft_label'].cuda()

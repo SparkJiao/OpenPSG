@@ -44,12 +44,16 @@ os.makedirs('./results', exist_ok=True)
 device = torch.device("cuda:0")
 
 # loading model
-model, preprocess = clip.load("ViT-B/32", device=device)
 if args.model_name == "clip":
-    pass
+    model, preprocess = clip.load("ViT-B/32", device=device)
 elif args.model_name == "clip_concat":
+    model, preprocess = clip.load("ViT-B/32", device=device)
     model = CLIPConcat(model, embed_dim=model.text_projection.data.size(1))
     model.to(device)
+elif args.model_name == "ViT-L-14":
+    model, preprocess = clip.load("ViT-L/14", device=device)
+elif args.model_name == "ViT-L-14-336px":
+    model, preprocess = clip.load("ViT-L/14@336px", device=device)
 else:
     raise ValueError(args.model_name)
 print('Model Loaded...', flush=True)

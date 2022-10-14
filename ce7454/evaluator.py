@@ -98,7 +98,8 @@ class CLIPEvaluator(Evaluator):
                 data = batch['data'].cuda()
                 text = batch['text'][0].cuda()
 
-                with torch.cuda.amp.autocast(dtype=torch.bfloat16):
+                # with torch.cuda.amp.autocast(dtype=torch.bfloat16):
+                with torch.cuda.amp.autocast():
                     logits, _ = self.net(data, text)
 
                 prob = torch.sigmoid(logits.float())
